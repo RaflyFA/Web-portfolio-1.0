@@ -1,0 +1,5 @@
+# Mengatur baris akhir untuk semua file teks
+* text=auto
+
+# Mengatur baris akhir untuk file CSS
+*.css text eol=lf

@@ -5,116 +5,348 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Portfolio</title>
-   <link href="src/output.css" rel="stylesheet">
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.0/flowbite.min.js"></script>
+   <script src="https://cdn.tailwindcss.com"></script>
+   <link rel="stylesheet" href="src/output.css">
+   <style>
+      body {
+         background: #010101;
+         /* Dark background */
+         font-family: 'Inter', sans-serif;
+         padding-top: 60px;
+      }
 
+      .glow-text {
+         text-shadow: 0 0 6px #9333ea, 0 0 20px #9333ea;
+      }
+
+      .glow-box {
+         box-shadow: 0 0 0px #9233ea00, 0 0 40px #9c55de;
+         opacity: 0.7;
+      }
+
+      .grid-lines {
+         background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+         background-size: 25px 25px;
+         
+         width: 100%;
+         height: 100%;
+         backdrop-filter: blur(10px);
+         z-index: -1;
+      }
+
+      #typing-text {
+         position: relative;
+         display: inline-block;
+         overflow: hidden;
+         white-space: nowrap;
+         border-right: 4px solid #9333ea;
+         /* Warna garis */
+         animation: blink-caret 0.7s steps(1) infinite;
+      }
+
+      @keyframes blink-caret {
+         50% {
+            border-color: transparent;
+         }
+      }
+
+      .animate-fade-in-up {
+         animation: fadeInUp 2s ease-out forwards;
+      }
+
+      @keyframes fadeInUp {
+         from {
+            opacity: 0;
+            transform: translateY(20px);
+         }
+
+         to {
+            opacity: 1;
+            transform: translateY(0);
+         }
+      }
+
+      @media (max-width: 768px) {
+         .glow-box {
+            box-shadow: 0 0 0px #9233ea00, 0 0 20px #9c55de;
+         }
+      }
+   </style>
 </head>
 
-<body class="bg-black">
-
-   <!-- navbar -->
-   <nav class="border-gray-200 fixed w-full bg-black">
-      <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-         <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
-
-            <span class="self-center text-2xl font-bold whitespace-nowrap dark:text-yellow-300 ">Rafly<span
-                  class="text-yellow-300">FA{};</span></span>
-         </a>
-         <div class="flex md:order-2">
-            <button type="button" data-collapse-toggle="navbar-search" aria-controls="navbar-search"
-               aria-expanded="false"
-               class="md:hidden text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 me-1">
-               <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                  viewBox="0 0 20 20">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                     d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-               </svg>
-               <span class="sr-only">Search</span>
-            </button>
-            <div class="relative hidden md:block">
-               <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                  <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                  </svg>
-                  <span class="sr-only">Search icon</span>
-               </div>
-               <input type="text" id="search-navbar"
-                  class="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="Search...">
-            </div>
-            <button data-collapse-toggle="navbar-search" type="button"
-               class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-               aria-controls="navbar-search" aria-expanded="false">
-               <span class="sr-only">Open main menu</span>
-               <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                  viewBox="0 0 17 14">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                     d="M1 1h15M1 7h15M1 13h15" />
+<body class="bg-[#040313] text-white font-sans">
+   <nav class="bg-[#040313] fixed top-0 w-full z-50 shadow-lg ">
+      <div class="max-w-screen-xl mx-auto px-6 py-3 flex justify-between items-center lg:px-28">
+         <a href="#"
+            class="text-xl font-extrabold bg-gradient-to-r from-indigo-500 to-purple-700 bg-clip-text text-transparent">Rafly
+            FA</a>
+         <div class="md:hidden">
+            <button id="menu-button" class="text-gray-400 hover:text-white focus:outline-none focus:text-white">
+               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                  </path>
                </svg>
             </button>
          </div>
-         <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-search">
-            <div class="relative mt-3 md:hidden">
-               <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                  <svg class="w-4 h-4 text-gray-500 dark:text-yellow-200" aria-hidden="true"
-                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                  </svg>
-               </div>
-               <input type="text" id="search-navbar"
-                  class="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  "
-                  placeholder="Search...">
-            </div>
-            <ul
-               class="flex flex-col p-4 md:p-0 mt-4 font-medium border rounded-lg  md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
-               <li>
-                  <a href="#"
-                     class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 hover:text-yellow-300 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-yellow-300 dark:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700">Home</a>
-               </li>
-               <li>
-                  <a href="#"
-                     class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 hover:text-yellow-300 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-yellow-300 dark:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700">About</a>
-               </li>
-               <li>
-                  <a href="#"
-                     class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white hover:text-yellow-300 md:dark:hover:text-yellow-300 dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700">Skill</a>
-               </li>
-               <li>
-                  <a href="#"
-                     class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 hover:text-yellow-300 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-yellow-300 dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700">Project</a>
-               </li>
-               <li>
-                  <a href="#"
-                     class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 hover:text-yellow-300 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-yellow-300 dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
-               </li>
-            </ul>
+         <div id="menu" class="hidden md:flex space-x-8 font-semibold lg:gap-3">
+            <a href="#home" class="nav-link hover:border-b-2 hover:border-b-indigo-500 ">Home</a>
+            <a href="#About" class="nav-link  hover:border-b-2 hover:border-b-indigo-500">About</a>
+            <a href="#portofolio" class="nav-link hover:border-b-2 hover:border-b-indigo-500">Portofolio</a>
+            <a href="#contact" class="nav-link hover:border-b-2 hover:border-b-indigo-500">Contact</a>
          </div>
       </div>
    </nav>
+   <!-- Navbar 2 -->
+   <div id="mobile-menu"
+      class="fixed inset-0 bg-[#040313] bg-opacity-75 z-40 transform -translate-x-full transition-transform duration-300">
+      <div class="absolute top-0 left-0 w-64 h-full bg-[#040313] p-4">
+         <button id="close-button"
+            class="text-gray-400 hover:text-white focus:outline-none focus:text-white transform -translate-x-full transition-transform duration-300">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+               xmlns="http://www.w3.org/2000/svg">
+               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+         </button>
+         <nav class="mt-4">
+            <hr class="mb-4 ml-3 border-gray-700">
+            <a href="#home"
+               class="block py-2 px-3 text-white hover:bg-gray-900 hover:text-indigo-500 font-semibold rounded">Home</a>
+            <a href="#about"
+               class="block py-2 px-3 text-white hover:bg-gray-900 hover:text-indigo-500 font-semibold  rounded">About</a>
+            <a href="#portofolio"
+               class="block py-2 px-3 text-white hover:bg-gray-900 hover:text-indigo-500 font-semibold rounded">Portofolio</a>
+            <a href="#contact"
+               class="block py-2 px-3 text-white hover:bg-gray-900 hover:text-indigo-500 font-semibold  rounded">Contact</a>
+         </nav>
+      </div>
+   </div>
 
-   <!-- section -->
-   <section>
-      <div class="flex py-28 ">
-         <div class="mx-auto ">
-            <img src="src/rfl 2.jpg" alt="Rafly FA" class="w-48 h-48 rounded-full mx-auto text-center m-8 border-4 border-amber-300">
-            <div class="text-white text-center">
-               <h1 class="text-2xl font-bold">Hi, it's <span class="text-yellow-300">Rafly FA</span></h1>
-               <h2>I'm a Web Developer</h2>
-               <p>Welcome to My Personal Website. 👋</p>
+
+   <!-- main -->
+   <main class="flex flex-col bg-[#040313] items-center text-center text-white px-4 md:px-8 lg:py-12 grid-lines lg:mt-0">
+      <section class="mt-24 md:mt-16 lg:flex lg:mt-0 lg:text-left md:flex md:text-left">
+         <div class=" lg:block md:mr-28 lg:mr-[12.5rem]">
+            <h2
+               class="text-4xl md:text-[2.85rem] lg:text-6xl font-extrabold 
+               bg-gradient-to-r from-indigo-500 to-purple-700 bg-clip-text text-transparent relative z-10 pb-2 animate-fade-in-up">
+               Rafly
+               <div
+                  class="absolute inset-0 items-center w-28 lg:w-40 h-10 lg:h-16 ml-32 lg:ml-0 blur-3xl bg-purple-700 opacity-40 rounded-full z-0">
+               </div>
+            </h2>
+
+            <h2
+               class="text-4xl text-white md:text-[2.85rem] lg:text-6xl font-extrabold leading-tight animate-fade-in-up">
+               Fahusnul Akbar
+               <div
+                  class="absolute inset-0 w-72 h-8 lg:h-14 mt-16 ml-10 lg:ml-0 lg:mt-[1rem] lg:opacity-60 lg:w-[30rem] blur-3xl bg-purple-700 opacity-70 rounded-full z-20">
+               </div>
+            </h2>
+
+            <p id="typing-text"
+               class="animate-fade-in-up mt-3 text-lg font-light px-0 md:text-base lg:text-[1.5rem] lg:tracking-widest lg:font-extralight lg:mt-7 lg:mb-1 text-white h-7">
+               <!-- Teks akan dimasukkan di sini oleh JavaScript -->
+            </p>
+            <p
+               class="mt-4 text-sm px-10 font-light md:text-base text-gray-400 md:px-0 lg:text-lg lg:px-0 animate-fade-in-up">
+               Welcome to my Portfolio Website 👋. <br>Explore, Enjoy, dan jangan ragu buat Reach Out !!!.
+            </p>
+            <div class="flex md:flex-row gap-4 lg:gap-4 md:gap-8 mt-16 animate-fade-in-up lg:mt-6 md:mt-9">
+               <a href="#portofolio"
+                  class="px-6 py-3 ml-14 md:ml-0 w-32 text-sm bg-black hover:bg-purple-600 rounded-lg glow-box transition-all duration-700 text-white flex items-center justify-center text-center md:px-0 md:w-32 md:h-10 md:text-sm lg:mx-0 lg:w-40 lg:h-10 lg:text-[0.9rem] mx-auto">Projects
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                     class="lucide ms-2 lucide-external-link w-4 h-4 text-gray-200 group-hover:rotate-45 transform transition-all duration-300 ">
+                     <path d="M15 3h6v6"></path>
+                     <path d="M10 14 21 3"></path>
+                     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  </svg></a>
+               <a href="#contact"
+                  class="px-6 py-3 mr-14 md:mr-16 w-32 text-sm bg-black hover:bg-purple-600 rounded-lg glow-box transition-all duration-700 text-white flex items-center justify-center text-center md:px-0 md:w-32 md:h-10 md:text-sm lg:mx-0 lg:w-40 lg:h-10 lg:text-sm mx-auto">Contact
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                     class="ms-2 lucide lucide-mail w-4 h-4 text-gray-200 group-hover:translate-x-1 transform transition-all duration-300 z-10">
+                     <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                     <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                  </svg></a>
+
             </div>
+            <footer class="mt-7 md:mt-6 lg:mt-[3rem] text-gray-400 text-center text-xs animate-fade-in-up">
+               <div  class="flex justify-center space-x-4 md:justify-start lg:justify-start lg:gap-5 lg:ml-3">
+                  <a href="https://www.linkedin.com/in/rafly-fahusnul-akbar-846a07311/" target="_blank"
+                     class="relative rounded-xl bg-black/50 backdrop-blur-xl p-2 flex items-center justify-center border border-white/10 hover:border-white/20 transition-all duration-300 glow-box w-[2rem] h-[2rem] lg:w-9 lg:h-9 md:w-9 md:h-9">
+                     <div
+                        class="absolute inset-0 bg-gradient-to-r from-[#6366f1] to-[#a855f7] rounded-xl blur opacity-20 hover:opacity-40 transition duration-300">
+                     </div>
+                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-linkedin  text-gray-400 hover:text-white transition-colors">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                        </path>
+                        <rect width="4" height="12" x="2" y="9"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                     </svg>
+
+                  </a>
+                  <a href="https://github.com/RaflyFA" target="_blank"
+                     class="relative rounded-xl bg-black/50 backdrop-blur-xl p-2 flex items-center justify-center border border-white/10 hover:border-white/20 transition-all duration-300 glow-box w-[2rem]  h-[2rem] lg:w-9 lg:h-9 md:w-9 md:h-9">
+                     <div
+                        class="absolute inset-0 bg-gradient-to-r from-[#6366f1] to-[#a855f7] rounded-xl blur opacity-20 hover:opacity-40 transition duration-300">
+                     </div>
+                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-github text-gray-400 hover:text-white transition-colors">
+                        <path
+                           d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4">
+                        </path>
+                        <path d="M9 18c-4.51 2-5-2-7-2"></path>
+                     </svg>
+                  </a>
+                  <a href="https://www.instagram.com/rfl.yfa" target="_blank"
+                     class="relative rounded-xl bg-black/50 backdrop-blur-xl p-2 flex items-center justify-center border border-white/10 hover:border-white/20 transition-all duration-300 glow-box w-[2rem]  h-[2rem] lg:w-9 lg:h-9 md:w-9 md:h-9">
+                     <div
+                        class="absolute inset-0 bg-gradient-to-r from-[#6366f1] to-[#a855f7] rounded-xl blur opacity-20 hover:opacity-40 transition duration-300">
+                     </div>
+                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-instagram  text-gray-400 hover:text-white transition-colors">
+                        <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                     </svg>
+                  </a>
+               </div>
+            </footer>
          </div>
 
+         <section class="mt-6 md:mt-14 lg:mt-10 relative">
+            <div class="flex justify-center items-center">
+               <div class="relative -z-10 lg:mr-14">
+                  <img src="src/rfl 2.jpg" alt="Illustration"
+                     class="max-w-full w-32 rounded-full md:rounded-xl lg:rounded-2xl md:w-52 lg:w-72 glow-box hidden lg:block md:block">
+
+               </div>
+            </div>
+         </section>
+
+      </section>
+   </main>
 
 
-
+   <section class="mt-10 md:mt-16 lg:mt-10 lg:flex lg:text-left md:flex md:text-left">
+      <div class=" lg:block md:mr-28 lg:mr-[10.5rem]">
+         <h2
+            class="text-4xl md:text-[2.85rem] lg:text-6xl font-extrabold 
+            bg-gradient-to-r from-indigo-500 to-purple-700 bg-clip-text text-transparent relative z-10 pb-1 animate-fade-in-up">
+            Rafly
+            <div
+               class="absolute inset-0 items-center w-28 lg:w-40 h-10 lg:h-16 ml-32 lg:ml-0 blur-3xl bg-purple-700 opacity-40 rounded-full z-0">
+            </div>
+         </h2>
       </div>
    </section>
 
 
 
+
+
+
+
+
+   <!-- Javascript -->
+   <script>
+
+      // Active link highlighting
+      const links = document.querySelectorAll('.nav-link');
+      links.forEach(link => {
+         link.addEventListener('click', () => {
+            links.forEach(l => l.classList.remove('text-indigo-500', 'border-b-2', 'border-indigo-500'));
+            link.classList.add('text-indigo-500', 'border-b-2', 'border-indigo-500');
+         });
+      });
+
+      // Highlight the active link based on the current URL
+      function highlightActiveLink() {
+         const currentPath = window.location.hash || window.location.pathname;
+         links.forEach(link => {
+            if (link.getAttribute('href') === currentPath) {
+               link.classList.add('text-indigo-500', 'border-b-2', 'border-indigo-500');
+            } else {
+               link.classList.remove('text-indigo-500', 'border-b-2', 'border-indigo-500');
+            }
+         });
+      }
+
+      window.addEventListener('hashchange', highlightActiveLink);
+      window.addEventListener('load', highlightActiveLink);
+
+
+
+      // typing Text
+      const typingTextElement = document.getElementById('typing-text');
+      const texts = ["Student at Universitas Siliwangi", "FrontEnd Developer"];
+      let currentTextIndex = 0;
+      let currentCharIndex = 0;
+
+      function typeEffect() {
+         if (currentCharIndex < texts[currentTextIndex].length) {
+            typingTextElement.textContent += texts[currentTextIndex][currentCharIndex];
+            currentCharIndex++;
+            setTimeout(typeEffect, 100); // Kecepatan mengetik
+         } else {
+            setTimeout(deleteEffect, 1500); // Tunggu sebelum menghapus
+         }
+      }
+
+      function deleteEffect() {
+         if (currentCharIndex > 0) {
+            typingTextElement.textContent = texts[currentTextIndex].substring(0, currentCharIndex - 1);
+            currentCharIndex--;
+            setTimeout(deleteEffect, 50); // Kecepatan menghapus
+         } else {
+            currentTextIndex = (currentTextIndex + 1) % texts.length; // Ganti teks
+            setTimeout(typeEffect, 500);
+         }
+      }
+
+
+
+
+
+
+
+      // mobile
+
+      // Mulai animasi garis 3
+      typeEffect();
+
+      const menuButton = document.getElementById('menu-button');
+      const closeButton = document.getElementById('close-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      menuButton.addEventListener('click', () => {
+         mobileMenu.classList.toggle('-translate-x-full');
+      });
+
+      closeButton.addEventListener('click', () => {
+         mobileMenu.classList.toggle('-translate-x-full');
+      });
+
+      document.addEventListener('click', (event) => {
+         if (!mobileMenu.contains(event.target) && !menuButton.contains(event.target)) {
+            mobileMenu.classList.add('-translate-x-full');
+         }
+      });
+
+      const navLinks = mobileMenu.querySelectorAll('a');
+      navLinks.forEach(link => {
+         link.addEventListener('click', () => {
+            mobileMenu.classList.add('-translate-x-full');
+         });
+      });
+   </script>
 
 </body>
 
